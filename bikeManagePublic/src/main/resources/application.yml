@@ -1,0 +1,11 @@
+# application.yml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bike
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.beson.model
