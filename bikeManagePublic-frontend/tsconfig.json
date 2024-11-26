@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "esnext", // 设置 TypeScript 编译的目标版本
+    "module": "esnext", // 指定生成哪个模块系统代码
+    "moduleResolution": "node", // 指定模块解析策略
+    "esModuleInterop": true, // 允许默认导入非ES模块
+    "strict": true, // 启用所有严格类型检查选项
+    "jsx": "preserve", // 在 .tsx 文件中支持 JSX
+    "experimentalDecorators": true, // 启用实验性的ES装饰器
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入
+    "sourceMap": true, // 生成相应的 .map 文件
+    "baseUrl": ".", // 解析非相对模块名的基准目录
+
+    "paths": {
+      // 指定模块的路径映射，例如将 '@' 映射到 'src' 目录
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ] // 编译过程中需要包含的库文件
+  },
+  "include": [
+    "src/**/*.ts", // 包含 src 目录下的所有 .ts 文件
+    "src/**/*.vue" // 包含 src 目录下的所有 .vue 文件
+  ],
+  "exclude": [
+    "node_modules" // 排除 node_modules 目录
+  ]
+}
