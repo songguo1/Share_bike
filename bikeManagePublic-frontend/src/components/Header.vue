@@ -5,20 +5,33 @@
     </div>
     <div class="navigation">
       <ul>
-        <li v-for="item in nav_list">{{ item.name }}</li>
+        <li v-for="item in nav_list" 
+            :key="item.name" 
+            @click="handleNavClick(item.id)">
+          {{ item.name }}
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script setup>
-import {} from "vue";
+import { useContentStore } from '@/stores/contentStore'
+
+const contentStore = useContentStore()
+
 const nav_list = [
-  { name: "查询投放区域" },
-  { name: "增设投放区域" },
-  { name: "单车定位查询" },
-  { name: "单车热点分析" },
+  {id: 1, name: "查询投放区域" },
+  {id: 2, name: "增设投放区域" },
+  {id: 3, name: "单车定位查询" },
+  {id: 4, name: "单车热点分析" },
 ];
+
+const handleNavClick = (id) => {
+  if (id === 1) {
+    contentStore.toggleRegionTable(true)
+  }
+};
 </script>
 <style lang="scss" scoped>
 .header {

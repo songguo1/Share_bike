@@ -15,6 +15,7 @@ declare module 'vue' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
@@ -26,6 +27,7 @@ declare module 'vue' {
     OlMap_1: typeof import('./src/components/OlMap_1.vue')['default']
     Popup: typeof import('./src/components/Popup.vue')['default']
     PopupMenu: typeof import('./src/components/PopupMenu.vue')['default']
+    RegionTable: typeof import('./src/components/RegionTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

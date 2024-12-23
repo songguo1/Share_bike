@@ -86,6 +86,7 @@ const initMap = () => {
       projection: "EPSG:4326",
       wrapX: true,
       crossOrigin: "anonymous",
+      
     }),
   });
 

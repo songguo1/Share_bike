@@ -27,7 +27,7 @@
   "include": [
     "src/**/*.ts", // 包含 src 目录下的所有 .ts 文件
     "src/**/*.vue" // 包含 src 目录下的所有 .vue 文件
-  ],
+, "src/stores/contentStore.ts"  ],
   "exclude": [
     "node_modules" // 排除 node_modules 目录
   ]
