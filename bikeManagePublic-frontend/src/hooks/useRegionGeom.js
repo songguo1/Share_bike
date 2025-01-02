@@ -10,37 +10,37 @@ import { getCenter } from "ol/extent";
 export function useRegionGeometry() {
   const mapStore = useMapStore();
   const regionGeoJson = ref([]);
+  const highlightLayer = ref(null);
 
   const loadRegionGeometry = async (records) => {
     try {
+
       regionGeoJson.value = records.map((item) => {
         let geomWKB = new WKB().readGeometry(item.geometry, {
           dataProjection: "EPSG:4326",
           featureProjection: "EPSG:3857",
         });
-        let feature = new Feature({
+        return new Feature({
           geometry: geomWKB,
           name: item.name,
         });
-        return feature;
       });
 
-      mapStore.map.addLayer(
-        new VectorLayer({
-          source: new VectorSource({
-            features: regionGeoJson.value,
+      const layer = new VectorLayer({
+        source: new VectorSource({
+          features: regionGeoJson.value,
+        }),
+        style: new Style({
+          fill: new Fill({
+            color: "rgba(255, 0, 0, 0.2)",
           }),
-          style: new Style({
-            fill: new Fill({
-              color: "rgba(255, 0, 0, 0.2)",
-            }),
-            stroke: new Stroke({
-              color: "#333",
-              width: 2,
-            }),
+          stroke: new Stroke({
+            color: "#333",
+            width: 2,
           }),
-        })
-      );
+        }),
+      });
+      mapStore.map.addLayer(layer);
     } catch (error) {
       console.error("加载地理数据失败:", error);
     }
@@ -48,10 +48,15 @@ export function useRegionGeometry() {
 
   // 定位并高亮显示区域
   async function locateRegion(geometry) {
+    if (highlightLayer.value) {
+      mapStore.map.removeLayer(highlightLayer.value);
+    }
+
     let polygonGeometry = new WKB().readGeometry(geometry, {
       dataProjection: "EPSG:4326",
       featureProjection: "EPSG:3857",
     });
+
     console.log(polygonGeometry);
 
     let polygonFeature = new Feature({
@@ -66,7 +71,7 @@ export function useRegionGeometry() {
       features: [polygonFeature],
     });
 
-    let vectorLayer = new VectorLayer({
+    highlightLayer.value = new VectorLayer({
       source: vectorSource,
       style: new Style({
         fill: new Fill({
@@ -80,7 +85,7 @@ export function useRegionGeometry() {
     });
 
     // 添加高亮图层
-    mapStore.map.addLayer(vectorLayer);
+    mapStore.map.addLayer(highlightLayer.value);
 
     mapStore.map.getView().animate({
       center: center,
@@ -88,7 +93,7 @@ export function useRegionGeometry() {
       duration: 1000,
     });
   }
-
+  
   return {
     loadRegionGeometry,
     locateRegion,

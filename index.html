@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenLayers绘制线条</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ol/dist/ol.js"></script>
+    <style>
+      .map {
+        width: 100%;
+        height: 600px;
+      }
+      .buttons {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="buttons">
+      <button onclick="startDrawing()">开始绘制</button>
+      <button onclick="stopDrawing()">停止绘制</button>
+    </div>
+    <div id="map" class="map"></div>
+
+    <script>
+      // 初始化地图
+      const map = new ol.Map({
+        target: "map",
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM(),
+          }),
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([116.397428, 39.90923]), // 北京中心坐标
+          zoom: 12,
+        }),
+      });
+
+      // 创建绘制图层
+      const source = new ol.source.Vector();
+      const vector = new ol.layer.Vector({
+        source: source,
+      });
+      map.addLayer(vector);
+
+      // 创建绘制交互
+      const draw = new ol.interaction.Draw({
+        source: source,
+        type: "LineString",
+      });
+
+      draw.on("drawend", function (event) {
+        console.log("绘制完成");
+        // 绘制完成后，移除绘制交互
+        console.log(draw)
+        map.removeInteraction(draw);
+      });
+
+      // 开始绘制
+      function startDrawing() {
+        map.addInteraction(draw);
+      }
+
+     
+    </script>
+  </body>
+</html>

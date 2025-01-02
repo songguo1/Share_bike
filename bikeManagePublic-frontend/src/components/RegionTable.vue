@@ -18,12 +18,12 @@
           <template #default="scope">
             <el-tag
               type="success"
-              v-if="scope.row.capacity / scope.row.exist > 0.6"
+              v-if="scope.row.exist / scope.row.capacity <= 0.6"
               >正常</el-tag
             >
             <el-tag
               type="warning"
-              v-if="scope.row.capacity / scope.row.exist <= 0.6"
+              v-if="scope.row.exist / scope.row.capacity > 0.6"
               >警告</el-tag
             >
           </template>

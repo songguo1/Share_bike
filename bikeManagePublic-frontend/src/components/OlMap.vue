@@ -23,14 +23,15 @@ import { useMapMarkers } from "@/hooks/useMapMarkers";
 
 const draw = ref(null);
 
-// 矢量图层
-const vectorSource = ref(new VectorSource());
+
 // 天地图token
 const token = "219d900abe817a196c0af21d6cec754b";
 // 地图store
 const mapStore = useMapStore();
 // 弹出框
 const popup = ref(null);
+// 矢量图层
+const vectorSource = mapStore.vectorSource;
 
 const mapMarkers = useMapMarkers();
 
@@ -45,7 +46,7 @@ const NanjingLayer = ref(null);
 
 // 绘制矢量图层
 const Drawvector = new VectorLayer({
-  source: vectorSource.value,
+  source: vectorSource,
   style: new Style({
     fill: new Fill({
       color: "rgba(255, 255, 255, 0.5)",
@@ -69,7 +70,6 @@ const initMap = () => {
     center: transform([118.65, 32.09], "EPSG:4326", "EPSG:3857"),
     zoom: 10,
   });
-
   // 创建天地图矢量底图和标签图层
   var layerTianDi = new Tile({
     source: new XYZ({
@@ -159,7 +159,7 @@ const addDrawInteraction = (drawType) => {
   }
 
   draw.value = new Draw({
-    source: vectorSource.value,
+    source: vectorSource,
     type: geometryType,
   });
 
