@@ -1,6 +1,7 @@
 package com.beson.model;
 
 import lombok.Data;
+import org.opengis.geometry.Geometry;
 
 @Data
 public class Region {
@@ -9,5 +10,5 @@ public class Region {
     private String rno;
     private Integer capacity;
     private Integer exist;
-    private String geometry; // WKT格式
+    private String geometry;
 }

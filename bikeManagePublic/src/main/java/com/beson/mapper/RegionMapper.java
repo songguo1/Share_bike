@@ -4,6 +4,7 @@ import com.beson.DTO.RegionPageQueryDTO;
 import com.beson.model.Region;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -30,5 +31,5 @@ public interface RegionMapper {
      * @param region
      */
     @Insert("insert into regions(name, rno, capacity, exist, geometry) values(#{name}, #{rno}, #{capacity}, #{exist}, ST_GeomFromText(#{geometry}, 4326))")
-    void insertRegion(Region region);
+    Integer insertRegion(Region region);
 }

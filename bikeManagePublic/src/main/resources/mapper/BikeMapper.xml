@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beson.mapper.BikeMapper">
+    <insert id="insertBatch">
+        insert into bikes(bno,regionid,location) values
+        <foreach collection="list" item="bike" separator=",">
+            (#{bike.bno},#{bike.regionid},ST_GeomFromText(#{bike.location}))
+        </foreach>
+    </insert>
+</mapper>

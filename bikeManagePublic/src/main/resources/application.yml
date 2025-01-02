@@ -2,8 +2,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/bike
-    username:
-    password:
+    username: postgres
+    password: 566566
     driver-class-name: org.postgresql.Driver
 
 mybatis:
