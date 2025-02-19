@@ -28,3 +28,13 @@ CREATE INDEX idx_bikes_location ON bikes USING GIST(location);
 
 -- 单车区域索引
 CREATE INDEX idx_bikes_regionid ON bikes(regionid);
+
+-- 地点标识表
+CREATE TABLE locations (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    lon DOUBLE PRECISION NOT NULL,
+    lat DOUBLE PRECISION NOT NULL
+);
+
